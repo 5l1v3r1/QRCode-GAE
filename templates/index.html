@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Code Generator</title>
+    <style>
+
+        body {
+            font-size: 12px;
+            font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Georgia, tahoma, arial, simsun, "宋体", sans-serif;
+            color: #333;
+            background: #fff;
+            line-height: 160%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        .centered {
+            text-align: center;
+        }
+
+        th {
+            padding: 4px 8px;
+            border: 1px solid #ccc;
+            vertical-align: bottom;
+        }
+
+        td {
+            padding: 4px 8px;
+            border: 1px solid #ccc;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #eee;
+        }
+
+        td p {
+            margin-bottom: 8px;
+        }
+
+        ul.category li a {
+            color: #00284b;
+            font-size: 120%;
+        }
+
+        ul.category span {
+            background-color: #4d4d4d;
+            color: #f4f4f4;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div style="width:700px;margin:0 auto;text-align:left;">
+    <h1>QR Code Generator</h1>
+    <ul>
+        <li>
+            URL : <a href="{{ url_for('api') }}">/api</a>
+        </li>
+        <li>
+            Method : GET or POST
+        </li>
+    </ul>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Required or Optional</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>data</td>
+            <td>Required</td>
+            <td>The data must be UTF-8 URL-encoded. Note that URLs have a 2K maximum length, so if you want to encode
+                more than 2K bytes (minus the other URL characters), you will have to send your data using POST.<br/>
+                <b>Maximum character storage capacity:984</b>,all data will be encoded in UTF-8.
+            </td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>Optional</td>
+            <td>The size of each box.<br/>
+                The minimum value is 1, each box has only one pixel, and then shrink will not be able to scan. <br/>
+                The maximum value is 64, each box has 64 pixels. Image size is determined by the data.<br/>
+                <b>The default value is 4</b>, is the most common size.
+            </td>
+        </tr>
+        <tr>
+            <td>ecl</td>
+            <td>Optional</td>
+            <td>error_correction_level - QR codes support four levels of error correction to enable recovery of missing,
+                misread, or obscured data.
+                Greater redundancy is achieved at the cost of being able to store less data. Here are the supported
+                values:
+                <ul>
+                    <li>L - Allows recovery of up to 7% data loss</li>
+                    <li>M - Allows recovery of up to 15% data loss</li>
+                    <li>Q - Allows recovery of up to 25% data loss</li>
+                    <li>H - Allows recovery of up to 30% data loss</li>
+                </ul>
+            <b> The default value is M</b>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <form action="{{ url_for("api") }}" method="post">
+        <p>data:<textarea rows="10" cols="30" name="data" maxlength="948"></textarea></p>
+        <p>
+            size:
+            <select name="size">
+                {% for i in range(1,60) %}
+                    <option value="{{ i }}" {% if i==4 %} selected="selected" {% endif %}>{{ i }}</option>
+                {% endfor %}
+            </select>
+        </p>
+    <p>
+            error_correction_level:
+            <select name="ecl">
+                <option value="L">L</option>
+                <option value="M">M</option>
+                <option value="Q" selected="selected">Q</option>
+                <option value="H">H</option>
+            </select>
+        </p>
+
+
+        <input type="submit" value="Submit"/>
+    </form>
+
+</div>
+
+
+</body>
+</html>
