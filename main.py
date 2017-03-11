@@ -32,7 +32,7 @@
 
 
 import os
-import cStringIO
+import StringIO
 from flask import Flask
 from flask import send_file, request,render_template
 from PIL import Image
@@ -76,8 +76,7 @@ def api():
 
     if ecl not in ['L', 'M', 'Q', 'H']:
         ecl = 'M'
-    print(len(data))
-    qr = qrcode.QRCode(error_correction=ecl_map[ecl],box_size=1, border=1)
+    qr = qrcode.QRCode(error_correction=ecl_map[ecl],box_size=size, border=1)
     qr.add_data(data)
     try:
         qr.make()
@@ -85,10 +84,10 @@ def api():
         return "Error, Data Too Long",400
 
     img = qr.make_image()
-    img._img = img._img.resize((img.width * size, img.width * size),Image.ANTIALIAS)
+
 
     #
-    strIO = cStringIO.StringIO()
+    strIO = StringIO.StringIO()
     img.save(strIO)
     strIO.seek(0)
 
