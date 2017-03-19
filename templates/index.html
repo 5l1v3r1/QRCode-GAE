@@ -9,20 +9,22 @@
 
 </head>
 <body>
+
 <div class="header">
-    <div class="page">
-        <div class="header-main">
-            <div id="headerlogo">
-                <a href="/">QR Code Generator</a>
-            </div>
-            <div id="headermenu">
-                <ul>
-                    <li><a href="https://liantian.me/" title="ToolBox">LIANTIAN&#39;S LOG</a></li>
-                </ul>
-            </div>
+    <div class="header-main">
+        <div class="headerlogo">
+            <a href="/">QR Code Generator</a>
         </div>
-        <div class="content">
-            <h1>QR Code Generator</h1>
+        <div class="headermenu">
+            <ul>
+                    <li><a href="https://liantian.me/" title="ToolBox">LIANTIAN&#39;S LOG</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content post entry ">
+<h1>QR Code Generator</h1>
             <ul>
                 <li>
                     URL : <a href="{{ url_for('api') }}">/api</a>
@@ -82,7 +84,7 @@
 
 
             <form action="{{ url_for("api") }}" method="post">
-                <p>data:<textarea rows="10" cols="30" name="data" maxlength="948"></textarea></p>
+                <p>data:<textarea rows="10" cols="30" name="data" maxlength="948" style="width: 100%;"></textarea></p>
                 <p>
                     size:
                     <select name="size">
@@ -104,14 +106,15 @@
 
                 <input type="submit" value="Submit"/>
             </form>
+</div>
 
-        </div>
-        <div class="footer">
+
+<div class="footer">
             <p><a href="https://github.com/liantian-cn/qrcode.liantian.me">Source Code</a></p>
             <p> &copy; 2010-2017 liantian.me, All Rights Reserved.</p>
-        </div>
-    </div>
 </div>
+
+
 </body>
 </html>
 
